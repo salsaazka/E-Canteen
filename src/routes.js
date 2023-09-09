@@ -54,6 +54,8 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const UserManagement = React.lazy(() => import('./views/pages/user-management/Index'))
 const Items = React.lazy(() => import('./views/pages/items-management/Index'))
 const CardsManagement = React.lazy(() => import('./views/pages/card-management/Index'))
+const Device = React.lazy(() => import('./views/pages/device/Index'))
+const Order = React.lazy(() => import('./views/pages/order/Index'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -61,6 +63,8 @@ const routes = [
   { path: '/user-management', name: 'User Management', element: UserManagement },
   { path: '/items', name: 'Items', element: Items },
   { path: '/cards', name: 'Cards', element: CardsManagement },
+  { path: '/device', name: 'Devices', element: Device },
+  { path: '/order', name: 'Orders', element: Order },
   // End Pages
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },

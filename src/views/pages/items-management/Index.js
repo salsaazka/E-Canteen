@@ -7,6 +7,11 @@ const Items = () => {
     <div className="card">
       <div className="card-body">
         <Form>
+          <Form.Group className="mb-3" controlId="formBasicCanteen">
+            <Form.Label>Name Canteen</Form.Label>
+            <Form.Control type="text" placeholder="Insert Your Canteen" />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Name Items</Form.Label>
             <Form.Control type="text" placeholder="Insert Your Items" />
@@ -19,7 +24,7 @@ const Items = () => {
 
           <Form.Group className="mb-3" controlId="formBasicImage">
             <Form.Label>Image</Form.Label>
-            <Form.Control type="text" placeholder="Insert Your Price" />
+            <Form.Control type="text" placeholder="Insert Your Image" />
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
