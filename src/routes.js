@@ -50,8 +50,14 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
+// User Management
+const UserManagement = React.lazy(() => import('./views/pages/user-management/Index'))
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  // Pages
+  { path: '/user-management', name: 'User Management', element: UserManagement },
+  // End Pages
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
