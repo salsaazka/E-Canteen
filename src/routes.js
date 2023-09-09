@@ -52,11 +52,15 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 // User Management
 const UserManagement = React.lazy(() => import('./views/pages/user-management/Index'))
+const Items = React.lazy(() => import('./views/pages/items-management/Index'))
+const CardsManagement = React.lazy(() => import('./views/pages/card-management/Index'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // Pages
   { path: '/user-management', name: 'User Management', element: UserManagement },
+  { path: '/items', name: 'Items', element: Items },
+  { path: '/cards', name: 'Cards', element: CardsManagement },
   // End Pages
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
