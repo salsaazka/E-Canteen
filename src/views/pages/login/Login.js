@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-// import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import {
@@ -47,6 +46,9 @@ const Login = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
+        // const inputName = document.getElementById('nameLogin')
+        // inputName.value = ''
+        // setName('')
         const inputEmail = document.getElementById('usernameLogin')
         inputEmail.value = ''
         setUsername('')
@@ -100,7 +102,7 @@ const Login = () => {
                       </CInputGroup>
                       <CRow>
                         <CCol xs={6}>
-                          <CButton color="primary" className="px-4">
+                          <CButton color="primary" type="submit" className="px-4">
                             Login
                           </CButton>
                         </CCol>
