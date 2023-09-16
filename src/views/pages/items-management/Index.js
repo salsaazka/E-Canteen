@@ -7,8 +7,6 @@ const Items = () => {
   return (
     <div className="card">
       <div className="card-body">
-        <ItemsTable />
-
         <Form>
           <Form.Group className="mb-3" controlId="formBasicCanteen">
             <Form.Label>Name Canteen</Form.Label>
@@ -33,6 +31,7 @@ const Items = () => {
             Submit
           </Button>
         </Form>
+        <ItemsTable />
       </div>
     </div>
   )
