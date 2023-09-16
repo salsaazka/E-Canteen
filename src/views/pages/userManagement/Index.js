@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import UserManagementTable from './table'
 
 const UserManagement = () => {
   return (
@@ -20,6 +21,7 @@ const UserManagement = () => {
             Submit
           </Button>
         </Form>
+        <UserManagementTable />
       </div>
     </div>
   )
