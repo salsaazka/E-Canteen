@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import { cilCart } from '@coreui/icons'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
@@ -28,10 +29,11 @@ const AppSidebar = () => {
       onVisibleChange={(visible) => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
+      style={{ backgroundColor: '#274070' }}
     >
-      <CSidebarBrand className="d-none d-md-flex" to="/">
-        {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} /> */}
-        <h3>E- Canteen</h3>
+      <CSidebarBrand className="d-none d-md-flex mb-2" to="/">
+        <CIcon className="sidebar-brand-full" icon={cilCart} height={24} />
+        <h5 className="ms-2">E-Canteen</h5>
         <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
       </CSidebarBrand>
       <CSidebarNav>

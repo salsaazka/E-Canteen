@@ -15,3 +15,32 @@ p {
   outline: none;
   font-family: 'Poppins', sans-serif;
 }
+
+.sidebar-toggler.d-none.d-lg-flex {
+  display: none !important;
+}
+
+.sidebar-brand {
+  background: none !important;
+}
+
+.sidebar-nav .nav-title {
+  margin-top: 0 !important;
+}
+
+.card {
+  border: none !important;
+}
+
+.btn-primary {
+  background-color: #409DFF !important;
+  border-color: #409DFF !important;
+}
+
+.progress {
+  border-radius: 40px !important;
+}
+
+.progress-thin {
+  height: 6px !important;
+}
