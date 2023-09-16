@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import OrderTable from './table'
 
 const Order = () => {
   return (
@@ -26,6 +27,7 @@ const Order = () => {
             Submit
           </Button>
         </Form>
+        <OrderTable />
       </div>
     </div>
   )
