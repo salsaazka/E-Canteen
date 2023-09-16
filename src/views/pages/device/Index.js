@@ -18,6 +18,7 @@ const Device = () => {
         {
           headers: {
             'Content-Type': 'application/json',
+            // 'auth-token': localStorage.getItem('token'),
           },
         },
       )
@@ -30,10 +31,13 @@ const Device = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
+        const inputName = document.getElementById('device')
+        inputName.value = ''
+        setDevice('')
       })
       .catch((err) => {
         console.log(err.response.data.message)
-        toast.error(err.response.data.message, {
+        toast.success(err.response.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -51,6 +55,7 @@ const Device = () => {
             <Form.Group className="mb-3" controlId="formBasicDevice">
               <Form.Label>Name Device</Form.Label>
               <Form.Control
+                id="device"
                 type="text"
                 placeholder="Insert Your Device"
                 onChange={(e) => setDevice(e.target.value)}
