@@ -1,11 +1,14 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import ItemsTable from './table'
 
 const Items = () => {
   return (
     <div className="card">
       <div className="card-body">
+        <ItemsTable />
+
         <Form>
           <Form.Group className="mb-3" controlId="formBasicCanteen">
             <Form.Label>Name Canteen</Form.Label>
