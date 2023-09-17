@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import DeviceTable from './table'
 
 const Device = () => {
   const [device, setDevice] = useState('')
@@ -66,6 +67,7 @@ const Device = () => {
             </Button>
           </Form>
         </div>
+        <DeviceTable />
       </div>
       <ToastContainer />
     </>

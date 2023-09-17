@@ -17,19 +17,19 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
 const Register = () => {
-  const [name, setName] = useState('')
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [nameRegis, setName] = useState('')
+  const [usernameRegis, setUsername] = useState('')
+  const [passwordRegis, setPassword] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
+        `${process.env.REACT_APP_API_URL}api/v1/auth/register`,
         {
-          name: name,
-          username: username,
-          password: password,
+          name: nameRegis,
+          username: usernameRegis,
+          password: passwordRegis,
         },
         {
           headers: {
