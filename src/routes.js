@@ -57,6 +57,7 @@ const AddItem = React.lazy(() => import('./views/pages/itemManagement/addItem/In
 const CardsManagement = React.lazy(() => import('./views/pages/cardManagement/Index'))
 const Device = React.lazy(() => import('./views/pages/device/Index'))
 const AddDevice = React.lazy(() => import('./views/pages/device/addDevice/Index'))
+const EditDevice = React.lazy(() => import('./views/pages/device/editDevice/Index'))
 const Order = React.lazy(() => import('./views/pages/order/Index'))
 
 const routes = [
@@ -68,7 +69,7 @@ const routes = [
   { path: '/cards', name: 'Cards', element: CardsManagement },
   { path: '/devices', name: 'Devices', element: Device },
   { path: '/devices/add', name: 'Add Device', element: AddDevice },
-  { path: '/devices/edit/:id', name: 'Edit Device', element: AddDevice },
+  { path: '/devices/edit/:id', name: 'Edit Device', element: EditDevice },
   { path: '/orders', name: 'Orders', element: Order },
   // End Pages
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
