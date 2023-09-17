@@ -2,35 +2,22 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ItemsTable from './table'
+import { useNavigate } from 'react-router-dom'
 
 const Items = () => {
+  const navigate = useNavigate()
+  const handleNavigate = () => {
+    navigate('/items/add')
+  }
+
   return (
     <div className="card">
       <div className="card-body">
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicCanteen">
-            <Form.Label>Name Canteen</Form.Label>
-            <Form.Control type="text" placeholder="Insert Your Canteen" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Name Items</Form.Label>
-            <Form.Control type="text" placeholder="Insert Your Items" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPrice">
-            <Form.Label>Price</Form.Label>
-            <Form.Control type="number" placeholder="Insert Your Price" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicImage">
-            <Form.Label>Image</Form.Label>
-            <Form.Control type="text" placeholder="Insert Your Image" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
+        <div className="d-flex justify-content-end">
+          <Button variant="primary" onClick={handleNavigate}>
+            Add Item
           </Button>
-        </Form>
+        </div>
         <ItemsTable />
       </div>
     </div>
