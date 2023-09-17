@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react'
 import { useTable } from 'react-table'
 import axios from 'axios'
@@ -80,7 +81,7 @@ const ItemsTable = () => {
             <div className="d-flex justify-content-center align-items-center">
               <button
                 className="btn btn-danger"
-                onClick={() => handleDelete(props.row.original.id)}
+                onClick={() => handleDelete(props?.row?.original?.id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react'
 import { useTable } from 'react-table'
 import axios from 'axios'
@@ -34,19 +35,19 @@ const DeviceTable = () => {
 
   const handleDelete = (id) => {
     axios
-    .delete(`${process.env.REACT_APP_API_URL}/api/v1/device/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((res) => {
-      console.log(res.data.data)
-      getDevices()
-    })
-    .catch((err) => {
-      console.log(err.response.data.message)
-    })
-  } 
+      .delete(`${process.env.REACT_APP_API_URL}/api/v1/device/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        getDevices()
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
 
   const columns = React.useMemo(
     () => [
@@ -64,7 +65,10 @@ const DeviceTable = () => {
         Cell: (props) => {
           return (
             <div className="d-flex justify-content-center align-items-center">
-              <button className="btn btn-danger" onClick={() => handleDelete(props.row.original.id)}>
+              <button
+                className="btn btn-danger"
+                onClick={() => handleDelete(props?.row?.original?.id)}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

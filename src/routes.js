@@ -68,6 +68,7 @@ const routes = [
   { path: '/cards', name: 'Cards', element: CardsManagement },
   { path: '/devices', name: 'Devices', element: Device },
   { path: '/devices/add', name: 'Add Device', element: AddDevice },
+  { path: '/devices/edit/:id', name: 'Edit Device', element: AddDevice },
   { path: '/orders', name: 'Orders', element: Order },
   // End Pages
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
