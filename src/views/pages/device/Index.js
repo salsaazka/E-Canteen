@@ -66,8 +66,8 @@ const Device = () => {
               Submit
             </Button>
           </Form>
+          <DeviceTable />
         </div>
-        <DeviceTable />
       </div>
       <ToastContainer />
     </>

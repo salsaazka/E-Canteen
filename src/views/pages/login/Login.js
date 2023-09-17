@@ -30,7 +30,7 @@ const Login = () => {
     e.preventDefault()
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}api/v1/auth/login`,
+        `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
         {
           email: usernameLogin,
           password: passwordLogin,

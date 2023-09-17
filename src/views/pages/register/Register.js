@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault()
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}api/v1/auth/register`,
+        `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
         {
           name: name,
           email: email,

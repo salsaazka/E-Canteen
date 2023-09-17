@@ -28,7 +28,7 @@ const DeviceTable = () => {
   const data = device.map((item, index) => ({
     id: item._id,
     number: index + 1,
-    unique_device_id: item.device,
+    device: item.unique_device_id,
   }))
 
   const columns = React.useMemo(
@@ -59,7 +59,7 @@ const DeviceTable = () => {
 
   return (
     <div>
-      <table {...getTableProps()} className="w-100 bg-light rounded">
+      <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
         <thead className="text-left">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
