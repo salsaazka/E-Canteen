@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+
 const AddDevice = () => {
   const navigate = useNavigate()
 

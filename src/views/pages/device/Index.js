@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Device = () => {
   const navigate = useNavigate()
+
   const handleNavigate = () => {
     navigate('/devices/add')
   }

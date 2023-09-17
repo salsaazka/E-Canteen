@@ -4,18 +4,18 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
+
 const EditDevice = () => {
   const navigate = useNavigate()
   const params = useParams()
 
   const [device, setDevice] = useState('')
-  const [deviceId, setDeviceId] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/api/v1/device/${deviceId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/device/${params.id}`,
         {
           unique_device_id: device,
         },
@@ -62,7 +62,6 @@ const EditDevice = () => {
       .then((res) => {
         console.log(res.data.data)
         setDevice(res.data.data.unique_device_id)
-        setDeviceId(res.data.data._id)
       })
       .catch((err) => {
         console.log(err.response.data.message)
