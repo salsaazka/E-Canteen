@@ -90,8 +90,8 @@ const Login = () => {
                           <CIcon icon={cilUser} />
                         </CInputGroupText>
                         <CFormInput
-                          placeholder="Username"
-                          autoComplete="username"
+                          placeholder="Email"
+                          autoComplete="email"
                           onChange={(e) => setUsername(e.target.value)}
                         />
                       </CInputGroup>
