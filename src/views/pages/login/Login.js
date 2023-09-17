@@ -17,15 +17,20 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import Cookies from 'universal-cookie'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const cookies = new Cookies()
+  const navigate = useNavigate()
+
   const [usernameLogin, setUsername] = useState('')
   const [passwordLogin, setPassword] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
+        `${process.env.REACT_APP_API_URL}api/v1/auth/login`,
         {
           email: usernameLogin,
           password: passwordLogin,
@@ -55,10 +60,11 @@ const Login = () => {
         const inputPass = document.getElementById('passwordLogin')
         inputPass.value = ''
         setPassword('')
+        navigate('/dashboard')
       })
       .catch((err) => {
-        console.log(err.response.data.message)
-        toast.error(err.response.data.message, {
+        console.log(err?.response?.data?.message)
+        toast.error(err?.response?.data?.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
