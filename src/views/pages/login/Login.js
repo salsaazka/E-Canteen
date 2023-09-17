@@ -58,7 +58,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err.response.data.message)
-        toast.success(err.response.data.message, {
+        toast.error(err.response.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,

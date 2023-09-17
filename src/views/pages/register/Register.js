@@ -15,10 +15,13 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
+
   const [name, setName] = useState('')
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = (e) => {
@@ -28,7 +31,7 @@ const Register = () => {
         `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
         {
           name: name,
-          username: username,
+          email: email,
           password: password,
         },
         {
@@ -52,14 +55,14 @@ const Register = () => {
         setName('')
         const inputUsername = document.getElementById('username')
         inputUsername.value = ''
-        setUsername('')
+        setEmail('')
         const inputPass = document.getElementById('password')
         inputPass.value = ''
         setPassword('')
+        navigate('/login')
       })
       .catch((err) => {
-        console.log(err.response.data.message)
-        toast.success(err.response.data.message, {
+        toast.error(err?.response?.data?.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -95,7 +98,7 @@ const Register = () => {
                       <CFormInput
                         placeholder="Email"
                         autoComplete="email"
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-3">
