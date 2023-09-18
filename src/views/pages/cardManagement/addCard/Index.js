@@ -12,33 +12,15 @@ const AddCard = () => {
   const [card, setCard] = useState('')
   const [user, setUser] = useState('')
 
-  const getDetail = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/user/${params.id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        console.log(res.data.data)
-        setUser(res.data.data.user_id)
-      })
-      .catch((err) => {
-        console.log(err.response.data.message)
-      })
-  }
-  useEffect(() => {
-    getDetail()
-  }, [])
-
   const handleSubmit = (e) => {
+    // console.log(params.id)
     e.preventDefault()
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/api/v1/card`,
         {
           card_id: card,
-          user_id: user,
+          user_id: params.id,
         },
         {
           headers: {
@@ -76,6 +58,24 @@ const AddCard = () => {
         })
       })
   }
+  const getUsers = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/user/${params.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        setUser(res.data.data.user_id)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+  useEffect(() => {
+    getUsers()
+  }, [])
 
   return (
     <>
@@ -91,13 +91,14 @@ const AddCard = () => {
                 onChange={(e) => setCard(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3 disable" controlId="formBasicName">
+            <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>User ID</Form.Label>
               <Form.Control
                 readOnly
                 id="user"
                 type="text"
-                defaultValue={params.id}
+                placeholder="User ID"
+                value={params.id}
                 onChange={(e) => setUser(e.target.value)}
               />
             </Form.Group>
