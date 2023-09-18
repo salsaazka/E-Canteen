@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const AddItem = () => {
+const EditItem = () => {
   const navigate = useNavigate()
+  const params = useParams()
 
-  const [canteen, setCanteen] = useState('')
   const [nameItem, setName] = useState('')
   const [priceItem, setPrice] = useState('')
   const [image, setImage] = useState('')
@@ -16,10 +16,9 @@ const AddItem = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/api/v1/item`,
+      .put(
+        `${process.env.REACT_APP_API_URL}/api/v1/item/${params.id}`,
         {
-          canteen_id: canteen,
           name: nameItem,
           price: priceItem,
           img_url: image,
@@ -40,15 +39,11 @@ const AddItem = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
-        const inputCanteen = document.getElementById('canteen')
-        inputCanteen.value = ''
-        setCanteen('')
-
-        const inputName = document.getElementById('nameItem')
+        const inputName = document.getElementById('name')
         inputName.value = ''
         setName('')
 
-        const inputPrice = document.getElementById('priceItem')
+        const inputPrice = document.getElementById('price')
         inputPrice.value = ''
         setPrice('')
 
@@ -69,29 +64,43 @@ const AddItem = () => {
       })
   }
 
+  const getDetail = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/item/${params.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        setName(res.data.data.name)
+        setPrice(res.data.data.price)
+        setImage(res.data.data.img_url)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+
+  useEffect(() => {
+    getDetail()
+  }, [])
+
   return (
     <>
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Group className="mb-3" controlId="formBasicCanteen">
               <Form.Label>Name Canteen</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                id="canteen"
-                onChange={(e) => setCanteen(e.target.value)}
-              >
-                <option>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
+              <Form.Control type="text" placeholder="Insert Your Canteen" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Name Items</Form.Label>
               <Form.Control
                 id="nameItem"
+                defaultValue={nameItem}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
                 placeholder="Insert Your Items"
@@ -102,6 +111,7 @@ const AddItem = () => {
               <Form.Label>Price</Form.Label>
               <Form.Control
                 id="priceItem"
+                defaultValue={priceItem}
                 onChange={(e) => setPrice(e.target.value)}
                 type="number"
                 placeholder="Insert Your Price"
@@ -112,6 +122,7 @@ const AddItem = () => {
               <Form.Label>Image</Form.Label>
               <Form.Control
                 id="image"
+                defaultValue={image}
                 onChange={(e) => setImage(e.target.value)}
                 type="text"
                 placeholder="Insert Your Image"
@@ -128,4 +139,4 @@ const AddItem = () => {
   )
 }
 
-export default AddItem
+export default EditItem
