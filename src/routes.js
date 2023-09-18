@@ -52,12 +52,17 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 // User Management
 const UserManagement = React.lazy(() => import('./views/pages/userManagement/Index'))
+
 const Items = React.lazy(() => import('./views/pages/itemManagement/Index'))
 const AddItem = React.lazy(() => import('./views/pages/itemManagement/addItem/Index'))
+const EditItem = React.lazy(() => import('./views/pages/itemManagement/editItem/Index'))
+
 const CardsManagement = React.lazy(() => import('./views/pages/cardManagement/Index'))
+
 const Device = React.lazy(() => import('./views/pages/device/Index'))
 const AddDevice = React.lazy(() => import('./views/pages/device/addDevice/Index'))
 const EditDevice = React.lazy(() => import('./views/pages/device/editDevice/Index'))
+
 const Order = React.lazy(() => import('./views/pages/order/Index'))
 
 const routes = [
@@ -66,6 +71,7 @@ const routes = [
   { path: '/user-management', name: 'User Management', element: UserManagement },
   { path: '/items', name: 'Items', element: Items },
   { path: '/items/add', name: 'Add Item', element: AddItem },
+  { path: '/items/edit/:id', name: 'Edit Item', element: EditItem },
   { path: '/cards', name: 'Cards', element: CardsManagement },
   { path: '/devices', name: 'Devices', element: Device },
   { path: '/devices/add', name: 'Add Device', element: AddDevice },
