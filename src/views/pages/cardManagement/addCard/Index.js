@@ -85,7 +85,7 @@ const AddCard = () => {
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Group className="mb-3">
               <Form.Label>Card</Form.Label>
               <Form.Control
                 id="card"
@@ -94,7 +94,7 @@ const AddCard = () => {
                 onChange={(e) => setCard(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Group className="mb-3">
               <Form.Label>User ID</Form.Label>
               <Form.Control
                 readOnly

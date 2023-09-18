@@ -17,12 +17,11 @@ const ItemsTable = () => {
       .get(`${process.env.REACT_APP_API_URL}/api/v1/item`, {
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': localStorage.getItem('auth_token'),
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
         console.log(res?.data?.data)
-        localStorage.setItem('auth_token')
         setItem(res?.data?.data)
       })
       .catch((err) => {

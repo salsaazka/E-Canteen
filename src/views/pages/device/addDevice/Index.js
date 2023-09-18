@@ -56,7 +56,7 @@ const AddDevice = () => {
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicDevice">
+            <Form.Group className="mb-3">
               <Form.Label>Name Device</Form.Label>
               <Form.Control
                 id="device"

@@ -4,8 +4,10 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const EditItem = () => {
+  const cookies = new Cookies()
   const navigate = useNavigate()
   const params = useParams()
 
@@ -26,13 +28,12 @@ const EditItem = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'auth-token': localStorage.getItem('auth_token'),
+            'auth-token': cookies.get('auth_token'),
           },
         },
       )
       .then((res) => {
         console.log(res?.data?.message)
-        localStorage.setItem('auth_token')
         toast.success(res?.data?.message, {
           position: 'bottom-right',
           autoClose: 3000,

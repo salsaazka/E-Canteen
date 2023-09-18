@@ -4,10 +4,10 @@ import { useTable } from 'react-table'
 import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import Cookies from 'universal-cookie'
+// import Cookies from 'universal-cookie'
 
 const CardTable = () => {
-  const cookies = new Cookies()
+  // const cookies = new Cookies()
 
   const [card, setCards] = useState([])
   const navigate = useNavigate()

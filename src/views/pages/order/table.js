@@ -5,8 +5,10 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const OrderTable = () => {
+  const cookies = new Cookies()
   const navigate = useNavigate()
   const handleNavigate = () => {
     navigate('/order-item/add')
@@ -18,12 +20,11 @@ const OrderTable = () => {
       .get(`${process.env.REACT_APP_API_URL}/api/v1/order/all`, {
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': localStorage.getItem('auth_token'),
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
         console.log(res.data.data)
-        localStorage.setItem('auth_token', localStorage.getItem('auth_token'))
         setOrder(res.data.data)
       })
       .catch((err) => {

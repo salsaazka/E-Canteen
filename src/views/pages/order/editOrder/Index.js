@@ -4,8 +4,10 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const EditOrder = () => {
+  const cookies = new Cookies()
   const navigate = useNavigate()
   const params = useParams()
 
@@ -17,7 +19,7 @@ const EditOrder = () => {
     e.preventDefault()
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/api/v1/device/${params.id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/order/${params.id}`,
         {
           user_id: user,
           canteen_id: canteen,
@@ -69,18 +71,17 @@ const EditOrder = () => {
       .get(`${process.env.REACT_APP_API_URL}/api/v1/order/${params.id}`, {
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': localStorage.getItem('auth_token'),
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
         console.log(res.data.data)
-        localStorage.setItem('auth_token', localStorage.getItem('auth_token'))
-        setUser(res.data.data.user_id)
-        setCanteen(res.data.data.canteen_id)
-        setTotal(res.data.data.total_price)
+        setUser(res.data.data[0].user_id)
+        setCanteen(res.data.data[0].canteen_id)
+        setTotal(res.data.data[0].total_price)
       })
       .catch((err) => {
-        console.log(err.response.data.message)
+        console.log(err.response)
       })
   }
 
@@ -93,7 +94,7 @@ const EditOrder = () => {
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicDevice">
+            <Form.Group className="mb-3">
               <Form.Label>User ID</Form.Label>
               <Form.Control
                 id="user"
@@ -101,9 +102,10 @@ const EditOrder = () => {
                 defaultValue={user}
                 placeholder="Insert Your User ID"
                 onChange={(e) => setUser(e.target.value)}
+                disabled
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicDevice">
+            <Form.Group className="mb-3">
               <Form.Label>Canteen ID</Form.Label>
               <Form.Control
                 id="canteen"
@@ -111,9 +113,10 @@ const EditOrder = () => {
                 defaultValue={canteen}
                 placeholder="Insert Your Canteen ID"
                 onChange={(e) => setCanteen(e.target.value)}
+                disabled
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicDevice">
+            <Form.Group className="mb-3">
               <Form.Label>Total Price</Form.Label>
               <Form.Control
                 id="totalPrice"

@@ -4,8 +4,10 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const AddOrder = () => {
+  const cookies = new Cookies()
   const navigate = useNavigate()
 
   const [user, setUser] = useState('')
@@ -25,13 +27,12 @@ const AddOrder = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'auth-token': localStorage.getItem('auth_token'),
+            'auth-token': cookies.get('auth_token'),
           },
         },
       )
       .then((res) => {
         console.log(res.data.message)
-        localStorage.setItem('auth_token', localStorage.getItem('auth_token'))
         toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
@@ -68,7 +69,7 @@ const AddOrder = () => {
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicDevice">
+            <Form.Group className="mb-3">
               <Form.Label>User ID</Form.Label>
               <Form.Control
                 id="user"
@@ -77,7 +78,7 @@ const AddOrder = () => {
                 onChange={(e) => setUser(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicDevice">
+            <Form.Group className="mb-3">
               <Form.Label>Canteen ID</Form.Label>
               <Form.Control
                 id="canteen"
@@ -86,7 +87,7 @@ const AddOrder = () => {
                 onChange={(e) => setCanteen(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicDevice">
+            <Form.Group className="mb-3">
               <Form.Label>Total Price</Form.Label>
               <Form.Control
                 id="totalPrice"
