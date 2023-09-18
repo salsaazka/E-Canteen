@@ -94,7 +94,7 @@ const AddCard = () => {
               <Form.Control
                 id="user"
                 type="text"
-                defaultValue={user}
+                defaultValue={params.id}
                 onChange={(e) => setUser(e.target.value)}
               />
             </Form.Group>
