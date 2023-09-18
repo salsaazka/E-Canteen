@@ -44,7 +44,7 @@ const Login = () => {
       )
       .then((res) => {
         console.log(res.data.message)
-        localStorage.setItem('auth_token', res.data.data.auth_token)
+        cookies.set('auth_token', res.data.data.auth_token)
         toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,

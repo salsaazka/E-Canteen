@@ -4,8 +4,11 @@ import { useTable } from 'react-table'
 import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const DeviceTable = () => {
+  const cookies = new Cookies()
+
   const [device, setDevices] = useState([])
   const navigate = useNavigate()
 

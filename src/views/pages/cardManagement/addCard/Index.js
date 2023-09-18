@@ -4,8 +4,11 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const AddCard = () => {
+  const cookies = new Cookies()
+
   const navigate = useNavigate()
   const params = useParams()
 
