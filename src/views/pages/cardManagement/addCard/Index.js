@@ -92,6 +92,7 @@ const AddCard = () => {
             <Form.Group className="mb-3 disable " controlId="formBasicName">
               <Form.Label>User ID</Form.Label>
               <Form.Control
+                readOnly
                 id="user"
                 type="text"
                 defaultValue={params.id}
