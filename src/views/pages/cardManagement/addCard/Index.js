@@ -89,7 +89,7 @@ const AddCard = () => {
                 onChange={(e) => setCard(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3 disable " controlId="formBasicName">
+            <Form.Group className="mb-3 disable" controlId="formBasicName">
               <Form.Label>User ID</Form.Label>
               <Form.Control
                 readOnly
