@@ -75,7 +75,7 @@ const AddItem = () => {
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Canteen</Form.Label>
+              <Form.Label>Name Canteen</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 id="canteen"
