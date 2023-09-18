@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import {
   CButton,
@@ -123,9 +124,12 @@ const Register = () => {
                       />
                     </CInputGroup> */}
                     <div className="d-grid">
-                      <CButton color="success" type="submit">
+                      <CButton color="primary" type="submit">
                         Create Account
                       </CButton>
+                      <p className="text-center text-medium-emphasis mt-2">
+                        Sudah mempunya akun? <Link to="/login">Login</Link>
+                      </p>
                     </div>
                   </CForm>
                 </CCardBody>

@@ -19,8 +19,10 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
+import LoginMiddleware from 'src/components/LoginMiddleware'
 
 const Login = () => {
+  LoginMiddleware()
   const cookies = new Cookies()
   const navigate = useNavigate()
 
@@ -44,6 +46,7 @@ const Login = () => {
       )
       .then((res) => {
         console.log(res.data.message)
+        localStorage.setItem('token', res.data.data.auth_token)
         toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
@@ -54,13 +57,14 @@ const Login = () => {
         // const inputName = document.getElementById('nameLogin')
         // inputName.value = ''
         // setName('')
+        window.location.href = '/dashboard'
         const inputEmail = document.getElementById('usernameLogin')
         inputEmail.value = ''
         setUsername('')
         const inputPass = document.getElementById('passwordLogin')
         inputPass.value = ''
         setPassword('')
-        navigate('/dashboard')
+        // navigate('/dashboard')
       })
       .catch((err) => {
         console.log(err?.response?.data?.message)
@@ -126,8 +130,8 @@ const Login = () => {
                     <div>
                       <h2>Sign up</h2>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
+                        Belum mempunyai akun? Silahkan daftar terlebih dahulu untuk dapat
+                        menggunakan aplikasi ini.
                       </p>
                       <Link to="/register">
                         <CButton color="primary" className="mt-3" active tabIndex={-1}>

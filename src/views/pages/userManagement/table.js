@@ -69,7 +69,7 @@ const UserManagementTable = () => {
         accessor: 'action',
         Cell: (props) => {
           return (
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="">
               <button
                 className="btn btn-danger"
                 onClick={() => handleDelete(props?.row?.original?.id)}

@@ -17,7 +17,8 @@ const Device = () => {
     <>
       <div className="card">
         <div className="card-body">
-          <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-between">
+            <h4>Device</h4>
             <Button variant="primary" onClick={handleNavigate}>
               Add Device
             </Button>

@@ -13,7 +13,8 @@ const Items = () => {
   return (
     <div className="card">
       <div className="card-body">
-        <div className="d-flex justify-content-end">
+        <div className="d-flex justify-content-between">
+          <h4>Item</h4>
           <Button variant="primary" onClick={handleNavigate}>
             Add Item
           </Button>

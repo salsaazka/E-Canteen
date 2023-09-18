@@ -66,7 +66,7 @@ const DeviceTable = () => {
         accessor: 'action',
         Cell: (props) => {
           return (
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="">
               <button
                 className="btn btn-primary me-2"
                 onClick={() => navigate('/devices/edit/' + props.row.original.id)}
