@@ -89,43 +89,16 @@ const AddCard = () => {
                 onChange={(e) => setCard(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3 disable " controlId="formBasicName">
+            <Form.Group className="mb-3 disable" controlId="formBasicName">
               <Form.Label>User ID</Form.Label>
               <Form.Control
+                readOnly
                 id="user"
                 type="text"
                 defaultValue={params.id}
                 onChange={(e) => setUser(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-body">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Card</Form.Label>
-              <Form.Control
-                id="card"
-                type="text"
-                placeholder="Insert Your Cards"
-                onChange={(e) => setCard(e)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>User</Form.Label>
-              <Form.Select aria-label="Default select example">
-                <option>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
-            </Form.Group>
-
             <Button variant="primary" type="submit">
               Submit
             </Button>
