@@ -4,9 +4,7 @@ import Form from 'react-bootstrap/Form'
 import CardTable from './table'
 
 const CardsManagement = () => {
-  return (
-   <></>
-  )
+  return <></>
 }
 
 export default CardsManagement
