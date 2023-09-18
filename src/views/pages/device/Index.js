@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import DeviceTable from './table'
 import { useNavigate } from 'react-router-dom'

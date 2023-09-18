@@ -65,6 +65,10 @@ const AddDevice = React.lazy(() => import('./views/pages/device/addDevice/Index'
 const EditDevice = React.lazy(() => import('./views/pages/device/editDevice/Index'))
 
 const Order = React.lazy(() => import('./views/pages/order/Index'))
+const AddOrder = React.lazy(() => import('./views/pages/order/addOrder/Index'))
+const EditOrder = React.lazy(() => import('./views/pages/order/editOrder/Index'))
+// const AddOrderItem = React.lazy(() => import('./views/pages/order/addOrderItem/Index'))
+// const EditOrderItem = React.lazy(() => import('./views/pages/order/editOrderItem/Index'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -79,6 +83,8 @@ const routes = [
   { path: '/devices/add', name: 'Add Device', element: AddDevice },
   { path: '/devices/edit/:id', name: 'Edit Device', element: EditDevice },
   { path: '/orders', name: 'Orders', element: Order },
+  { path: '/orders/add', name: 'Add Order', element: AddOrder },
+  { path: '/orders/edit/:id', name: 'Edit Order', element: EditOrder },
   // End Pages
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },

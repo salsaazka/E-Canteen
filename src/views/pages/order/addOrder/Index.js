@@ -1,54 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-const AddCard = () => {
+const AddOrder = () => {
   const navigate = useNavigate()
-  const params = useParams()
 
-  const [card, setCard] = useState('')
   const [user, setUser] = useState('')
-
-  const getDetail = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/user/${params.id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        console.log(res.data.data)
-        setUser(res.data.data.user_id)
-      })
-      .catch((err) => {
-        console.log(err.response.data.message)
-      })
-  }
-  useEffect(() => {
-    getDetail()
-  }, [])
+  const [canteen, setCanteen] = useState('')
+  const [totalPrice, setTotal] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/api/v1/card`,
+        `${process.env.REACT_APP_API_URL}/api/v1/order/order`,
         {
-          card_id: card,
           user_id: user,
+          canteen_id: canteen,
+          total_price: totalPrice,
         },
         {
           headers: {
             'Content-Type': 'application/json',
-            // 'auth-token': localStorage.getItem('token'),
+            'auth-token': localStorage.getItem('auth_token'),
           },
         },
       )
       .then((res) => {
         console.log(res.data.message)
+        localStorage.setItem('auth_token', res.data.data.auth_token)
         toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
@@ -56,14 +39,18 @@ const AddCard = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
-        const inputCard = document.getElementById('card')
-        inputCard.value = ''
-        setCard('')
-
         const inputUser = document.getElementById('user')
         inputUser.value = ''
         setUser('')
-        navigate('/cards')
+
+        const inputCanteem = document.getElementById('canteen')
+        inputCanteem.value = ''
+        setCanteen('')
+
+        const inputTotal = document.getElementById('totalPrice')
+        inputTotal.value = ''
+        setTotal('')
+        navigate('/orders')
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -76,29 +63,36 @@ const AddCard = () => {
         })
       })
   }
-
   return (
     <>
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Card</Form.Label>
-              <Form.Control
-                id="card"
-                type="text"
-                placeholder="Insert Your Cards"
-                onChange={(e) => setCard(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3 disable" controlId="formBasicName">
+            <Form.Group className="mb-3" controlId="formBasicDevice">
               <Form.Label>User ID</Form.Label>
               <Form.Control
-                readOnly
                 id="user"
                 type="text"
-                defaultValue={params.id}
+                placeholder="Insert Your User ID"
                 onChange={(e) => setUser(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicDevice">
+              <Form.Label>Canteen ID</Form.Label>
+              <Form.Control
+                id="canteen"
+                type="text"
+                placeholder="Insert Your Canteen ID"
+                onChange={(e) => setCanteen(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicDevice">
+              <Form.Label>Total Price</Form.Label>
+              <Form.Control
+                id="totalPrice"
+                type="number"
+                placeholder="Insert Your Total Price"
+                onChange={(e) => setTotal(e.target.value)}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -112,4 +106,4 @@ const AddCard = () => {
   )
 }
 
-export default AddCard
+export default AddOrder

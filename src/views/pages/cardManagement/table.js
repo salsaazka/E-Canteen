@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 
 const CardTable = () => {
   const [card, setCard] = useState([])
-  const [user, setUser] = useState([])``
   const navigate = useNavigate()
 
   const getCard = () => {
@@ -19,7 +18,6 @@ const CardTable = () => {
       .then((res) => {
         console.log(res.data.data)
         setCard(res.data.data)
-        setUser(res.data.data)
       })
       .catch((err) => {
         console.log(err.response.data.message)

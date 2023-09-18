@@ -27,12 +27,13 @@ const AddItem = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            // 'auth-token': localStorage.getItem('token'),
+            'auth-token': localStorage.getItem('auth_token'),
           },
         },
       )
       .then((res) => {
         console.log(res.data.message)
+        localStorage.setItem('auth_token')
         toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,

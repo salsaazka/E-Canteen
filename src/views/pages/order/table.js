@@ -1,137 +1,63 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react'
 import { useTable } from 'react-table'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import Button from 'react-bootstrap/Button'
+import { useNavigate } from 'react-router-dom'
 
 const OrderTable = () => {
-  const listData = [
-    {
-      id: 1,
-      name: 'Moise Marsters',
-      type: 'mmarsters0@stanford.edu',
-      address: '5th Floor',
-    },
-    {
-      id: 2,
-      name: 'Lilli Kildale',
-      type: 'lkildale1@google.cn',
-      address: 'Apt 120',
-    },
-    {
-      id: 3,
-      name: 'Bea Pedri',
-      type: 'bpedri2@samsung.com',
-      address: 'Room 1786',
-    },
-    {
-      id: 4,
-      name: 'Ciel Manna',
-      type: 'cmanna3@fc2.com',
-      address: 'PO Box 12023',
-    },
-    {
-      id: 5,
-      name: 'Pasquale Spanswick',
-      type: 'pspanswick4@gmpg.org',
-      address: 'PO Box 51471',
-    },
-    {
-      id: 6,
-      name: 'Franciskus McClay',
-      type: 'fmcclay5@answers.com',
-      address: 'Apt 1795',
-    },
-    {
-      id: 7,
-      name: 'Willyt Soigne',
-      type: 'wsoigne6@goodreads.com',
-      address: 'Room 256',
-    },
-    {
-      id: 8,
-      name: 'Brnaba Mowlam',
-      type: 'bmowlam7@spotify.com',
-      address: 'Suite 99',
-    },
-    {
-      id: 9,
-      name: 'Birgitta Milliere',
-      type: 'bmilliere8@yandex.ru',
-      address: '5th Floor',
-    },
-    {
-      id: 10,
-      name: 'Jareb Silber',
-      type: 'jsilber9@jigsy.com',
-      address: 'PO Box 48648',
-    },
-    {
-      id: 11,
-      name: 'Susette Raynes',
-      type: 'sraynesa@ucoz.ru',
-      address: 'Apt 1510',
-    },
-    {
-      id: 12,
-      name: 'Arlin oldey',
-      type: 'aoldeyb@pcworld.com',
-      address: 'Apt 529',
-    },
-    {
-      id: 13,
-      name: 'Wendye Durkin',
-      type: 'wdurkinc@godaddy.com',
-      address: 'Apt 1024',
-    },
-    {
-      id: 14,
-      name: 'Rubia Skaife',
-      type: 'rskaifed@creativecommons.org',
-      address: 'Room 1648',
-    },
-    {
-      id: 15,
-      name: 'Hendrik Capstack',
-      type: 'hcapstacke@cam.ac.uk',
-      address: 'Apt 21',
-    },
-    {
-      id: 16,
-      name: 'Andres Berge',
-      type: 'abergef@yahoo.co.jp',
-      address: 'Suite 44',
-    },
-    {
-      id: 17,
-      name: 'Rosabelle MacAdam',
-      type: 'rmacadamg@pagesperso-orange.fr',
-      address: 'PO Box 51079',
-    },
-    {
-      id: 18,
-      name: 'Gates Campey',
-      type: 'gcampeyh@admin.ch',
-      address: '13th Floor',
-    },
-    {
-      id: 19,
-      name: 'Andreana Salman',
-      type: 'asalmani@bbc.co.uk',
-      address: 'Apt 299',
-    },
-    {
-      id: 20,
-      name: 'Jemie Charlet',
-      type: 'jcharletj@newsvine.com',
-      address: 'Room 291',
-    },
-  ]
+  const navigate = useNavigate()
+  const handleNavigate = () => {
+    navigate('/order-item/add')
+  }
 
-  const data = listData.map((item, index) => ({
-    id: item.id,
+  const [order, setOrder] = useState([])
+  const getOrder = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/order/all`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': localStorage.getItem('auth_token'),
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        localStorage.setItem('auth_token', localStorage.getItem('auth_token'))
+        setOrder(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+
+  useEffect(() => {
+    getOrder()
+  }, [])
+
+  const data = order.map((item, index) => ({
+    id: item._id,
     number: index + 1,
-    name: item.name,
-    address: item.address,
+    user: item.user_id,
+    canteen: item.canteen_id,
+    total: item.total_price,
   }))
 
+  const handleDelete = (id) => {
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        getOrder()
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
   const columns = React.useMemo(
     () => [
       {
@@ -139,18 +65,70 @@ const OrderTable = () => {
         accessor: 'number',
       },
       {
-        Header: 'Name',
-        accessor: 'name',
+        Header: 'User ID',
+        accessor: 'user',
       },
       {
-        Header: 'Address',
-        accessor: 'address',
+        Header: 'Canteen ID',
+        accessor: 'canteen',
+      },
+      {
+        Header: 'Total Price',
+        accessor: 'total',
       },
       {
         Header: 'Action',
         accessor: 'action',
         Cell: (props) => {
-          return <></>
+          return (
+            <div className="d-flex justify-content-center align-items-center">
+              <button
+                className="btn btn-primary me-2"
+                onClick={() => navigate('/order-item/add/' + props.row.original.id)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-plus-square-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                </svg>
+              </button>
+              <button
+                className="btn btn-danger me-2"
+                onClick={() => handleDelete(props?.row?.original?.id)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="#FFFFFF"
+                  className="bi bi-trash3"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                </svg>
+              </button>
+              <button
+                className="btn btn-primary me-2"
+                onClick={() => navigate('/orders/edit/' + props.row.original.id)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-pencil"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                </svg>
+              </button>
+            </div>
+          )
         },
       },
     ],
