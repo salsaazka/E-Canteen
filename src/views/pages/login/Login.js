@@ -19,8 +19,10 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
+import LoginMiddleware from 'src/components/LoginMiddleware'
 
 const Login = () => {
+  LoginMiddleware()
   const cookies = new Cookies()
   const navigate = useNavigate()
 
@@ -55,13 +57,13 @@ const Login = () => {
         // const inputName = document.getElementById('nameLogin')
         // inputName.value = ''
         // setName('')
+        navigate('/dashboard')
         const inputEmail = document.getElementById('usernameLogin')
         inputEmail.value = ''
         setUsername('')
         const inputPass = document.getElementById('passwordLogin')
         inputPass.value = ''
         setPassword('')
-        navigate('/dashboard')
       })
       .catch((err) => {
         console.log(err?.response?.data?.message)
