@@ -31,9 +31,9 @@ const EditItem = () => {
         },
       )
       .then((res) => {
-        console.log(res.data.message)
+        console.log(res?.data?.message)
         localStorage.setItem('auth_token')
-        toast.success(res.data.message, {
+        toast.success(res?.data?.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -54,8 +54,8 @@ const EditItem = () => {
         navigate('/items')
       })
       .catch((err) => {
-        console.log(err.response.data.message)
-        toast.error(err.response.data.message, {
+        console.log(err?.response?.data?.message)
+        toast.error(err?.response?.data?.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -79,7 +79,7 @@ const EditItem = () => {
         setImage(res.data.data.img_url)
       })
       .catch((err) => {
-        console.log(err.response.data.message)
+        console.log(err?.response?.data?.message)
       })
   }
 

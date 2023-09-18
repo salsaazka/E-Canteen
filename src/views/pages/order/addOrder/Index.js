@@ -31,7 +31,7 @@ const AddOrder = () => {
       )
       .then((res) => {
         console.log(res.data.message)
-        localStorage.setItem('auth_token', res.data.data.auth_token)
+        localStorage.setItem('auth_token', localStorage.getItem('auth_token'))
         toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
