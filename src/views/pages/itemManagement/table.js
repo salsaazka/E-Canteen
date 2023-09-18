@@ -21,9 +21,9 @@ const ItemsTable = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.data)
+        console.log(res?.data?.data)
         localStorage.setItem('auth_token')
-        setItem(res.data.data)
+        setItem(res?.data?.data)
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -50,7 +50,7 @@ const ItemsTable = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.data)
+        console.log(res?.data?.data)
         getItem()
       })
       .catch((err) => {
