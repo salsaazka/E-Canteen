@@ -28,7 +28,7 @@ const EditOrder = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            // 'auth-token': localStorage.getItem('token'),
+            'auth-token': cookies.get('auth_token'),
           },
         },
       )

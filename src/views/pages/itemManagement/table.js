@@ -25,7 +25,7 @@ const ItemsTable = () => {
         setItem(res?.data?.data)
       })
       .catch((err) => {
-        console.log(err.response.data.message)
+        console.log(err?.response?.data?.message)
       })
   }
 
@@ -53,7 +53,7 @@ const ItemsTable = () => {
         getItem()
       })
       .catch((err) => {
-        console.log(err.response.data.message)
+        console.log(err?.response?.data?.message)
       })
   }
 
