@@ -78,7 +78,7 @@ const CardTable = () => {
             <div className="d-flex justify-content-center align-items-center">
               <button
                 className="btn btn-primary me-2"
-                onClick={() => navigate('/card/edit/' + props.row.original.id)}
+                onClick={() => navigate('/cards/edit/' + props.row.original.id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
