@@ -77,17 +77,13 @@ const AddItem = () => {
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Name Canteen</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
+              <Form.Label>Canteen</Form.Label>
+              <Form.Control
                 id="canteen"
                 onChange={(e) => setCanteen(e.target.value)}
-              >
-                <option>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
+                type="text"
+                placeholder="Insert Your Canteen"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicName">

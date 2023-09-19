@@ -37,7 +37,7 @@ const ItemsTable = () => {
     number: index + 1,
     canteen: item.canteen_id,
     name: item.name,
-    price: item.address,
+    price: item.price,
     image: item.img_url,
   }))
 
