@@ -26,7 +26,7 @@ const Login = () => {
   const cookies = new Cookies()
   const navigate = useNavigate()
 
-  const [usernameLogin, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [passwordLogin, setPassword] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,7 +34,7 @@ const Login = () => {
       .post(
         `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
         {
-          email: usernameLogin,
+          email: email,
           password: passwordLogin,
         },
         {
@@ -58,9 +58,9 @@ const Login = () => {
         // inputName.value = ''
         // setName('')
         navigate('/dashboard')
-        const inputEmail = document.getElementById('usernameLogin')
+        const inputEmail = document.getElementById('email')
         inputEmail.value = ''
-        setUsername('')
+        setEmail('')
         const inputPass = document.getElementById('passwordLogin')
         inputPass.value = ''
         setPassword('')
@@ -89,13 +89,11 @@ const Login = () => {
                       <h1>Login</h1>
                       <p className="text-medium-emphasis">Sign In to your account</p>
                       <CInputGroup className="mb-3">
-                        <CInputGroupText>
-                          <CIcon icon={cilUser} />
-                        </CInputGroupText>
+                        <CInputGroupText>@</CInputGroupText>
                         <CFormInput
-                          placeholder="Username"
-                          autoComplete="username"
-                          onChange={(e) => setUsername(e.target.value)}
+                          placeholder="Email"
+                          autoComplete="email"
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </CInputGroup>
                       <CInputGroup className="mb-4">
