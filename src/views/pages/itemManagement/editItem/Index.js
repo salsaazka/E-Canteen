@@ -33,8 +33,8 @@ const EditItem = () => {
         },
       )
       .then((res) => {
-        console.log(res?.data?.message)
-        toast.success(res?.data?.message, {
+        console.log(res.data.message)
+        toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -55,8 +55,8 @@ const EditItem = () => {
         navigate('/items')
       })
       .catch((err) => {
-        console.log(err?.response?.data?.message)
-        toast.error(err?.response?.data?.message, {
+        console.log(err.response.data.message)
+        toast.error(err.response.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -76,9 +76,9 @@ const EditItem = () => {
       })
       .then((res) => {
         console.log(res.data.data)
-        setName(res.data.data[0].name)
-        setPrice(res.data.data[0].price)
-        setImage(res.data.data[0].img_url)
+        setName(res.data.data.name)
+        setPrice(res.data.data.price)
+        setImage(res.data.data.img_url)
       })
       .catch((err) => {
         console.log(err.response)

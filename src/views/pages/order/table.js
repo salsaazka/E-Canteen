@@ -81,7 +81,7 @@ const OrderTable = () => {
         accessor: 'action',
         Cell: (props) => {
           return (
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center mt-3">
               <button
                 className="btn btn-primary me-2"
                 onClick={() => navigate('/order-item/add/' + props.row.original.id)}
@@ -142,7 +142,7 @@ const OrderTable = () => {
 
   return (
     <div>
-      <table {...getTableProps()} className="w-100 bg-light">
+      <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
         <thead className="text-left">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
