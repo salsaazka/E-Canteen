@@ -6,24 +6,24 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
-const EditItem = () => {
+const EditCard = () => {
   const cookies = new Cookies()
   const navigate = useNavigate()
   const params = useParams()
 
-  const [nameItem, setName] = useState('')
-  const [priceItem, setPrice] = useState('')
-  const [image, setImage] = useState('')
+  const [user_id, setUserId] = useState('')
+  const [card_id, setCardId] = useState('')
+  const [balance, setBalance] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/api/v1/item/${params.id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/card/top_up/${params.id}`,
         {
-          name: nameItem,
-          price: priceItem,
-          img_url: image,
+          user_id: user_id,
+          card_id: card_id,
+          balance: balance,
         },
         {
           headers: {
@@ -41,18 +41,18 @@ const EditItem = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
-        const inputName = document.getElementById('nameItem')
-        inputName.value = ''
-        setName('')
+        const inputUser = document.getElementById('user_id')
+        inputUser.value = ''
+        setUserId('')
 
-        const inputPrice = document.getElementById('priceItem')
-        inputPrice.value = ''
-        setPrice('')
+        const inputCanteen = document.getElementById('card_id')
+        inputCanteen.value = ''
+        setCardId('')
 
-        const inputImage = document.getElementById('image')
-        inputImage.value = ''
-        setImage('')
-        navigate('/items')
+        const inputTotal = document.getElementById('balance')
+        inputTotal.value = ''
+        setBalance('')
+        navigate('/cards')
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -66,9 +66,9 @@ const EditItem = () => {
       })
   }
 
-  const getDetail = () => {
+  const getCard = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/item/${params.id}`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/card/${params.id}`, {
         headers: {
           'Content-Type': 'application/json',
           'auth-token': cookies.get('auth_token'),
@@ -76,9 +76,9 @@ const EditItem = () => {
       })
       .then((res) => {
         console.log(res.data.data)
-        setName(res.data.data.name)
-        setPrice(res.data.data.price)
-        setImage(res.data.data.img_url)
+        setUserId(res.data.data.user_id)
+        setCardId(res.data.data.card_id)
+        setBalance(res.data.data.balance)
       })
       .catch((err) => {
         console.log(err.response)
@@ -86,7 +86,7 @@ const EditItem = () => {
   }
 
   useEffect(() => {
-    getDetail()
+    getCard()
   }, [])
 
   return (
@@ -94,41 +94,36 @@ const EditItem = () => {
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicCanteen">
-              <Form.Label>Name Canteen</Form.Label>
-              <Form.Control type="text" placeholder="Insert Your Canteen" />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Name Items</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>User ID</Form.Label>
               <Form.Control
-                id="nameItem"
-                defaultValue={nameItem}
-                onChange={(e) => setName(e.target.value)}
+                id="user_id"
                 type="text"
-                placeholder="Insert Your Items"
+                defaultValue={user_id}
+                placeholder="Insert Your User ID"
+                onChange={(e) => setUserId(e.target.value)}
+                disabled
               />
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPrice">
-              <Form.Label>Price</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Card ID</Form.Label>
               <Form.Control
-                id="priceItem"
-                defaultValue={priceItem}
-                onChange={(e) => setPrice(e.target.value)}
+                id="card_id"
+                type="text"
+                defaultValue={card_id}
+                placeholder="Insert Your Canteen ID"
+                onChange={(e) => setCardId(e.target.value)}
+                disabled
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Total Balance</Form.Label>
+              <Form.Control
+                id="balance"
                 type="number"
-                placeholder="Insert Your Price"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicImage">
-              <Form.Label>Image</Form.Label>
-              <Form.Control
-                id="image"
-                defaultValue={image}
-                onChange={(e) => setImage(e.target.value)}
-                type="text"
-                placeholder="Insert Your Image"
+                defaultValue={balance}
+                placeholder="Insert Your Total Balance"
+                onChange={(e) => setBalance(e.target.value)}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -141,5 +136,4 @@ const EditItem = () => {
     </>
   )
 }
-
-export default EditItem
+export default EditCard

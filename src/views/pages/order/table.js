@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { useTable } from 'react-table'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
-import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
@@ -22,11 +21,11 @@ const OrderTable = () => {
       })
       .then((res) => {
         // console.log(cookies.get('auth_token'))
-        console.log(res.data.data)
-        setOrder(res.data.data)
+        console.log(res?.data?.data)
+        setOrder(res?.data?.data)
       })
       .catch((err) => {
-        console.log(err.response.data.message)
+        console.log(err?.response?.data?.message)
       })
   }
 
@@ -51,11 +50,11 @@ const OrderTable = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.data)
+        console.log(res?.data?.data)
         getOrder()
       })
       .catch((err) => {
-        console.log(err.response.data.message)
+        console.log(err?.response?.data?.message)
       })
   }
   const columns = React.useMemo(
@@ -81,7 +80,7 @@ const OrderTable = () => {
         accessor: 'action',
         Cell: (props) => {
           return (
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center mt-3">
               <button
                 className="btn btn-primary me-2"
                 onClick={() => navigate('/order-item/add/' + props.row.original.id)}
@@ -142,7 +141,7 @@ const OrderTable = () => {
 
   return (
     <div>
-      <table {...getTableProps()} className="w-100 bg-light">
+      <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
         <thead className="text-left">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
@@ -171,6 +170,7 @@ const OrderTable = () => {
           })}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   )
 }
