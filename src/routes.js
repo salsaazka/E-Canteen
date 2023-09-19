@@ -72,6 +72,10 @@ const DetailItem = React.lazy(() => import('./views/pages/order/detailItem/Index
 
 // const Canteen = React.lazy(() => import('./views/pages/canteen/Index'))
 
+const Canteen = React.lazy(() => import('./views/pages/canteen/Index'))
+const AddCanteen = React.lazy(() => import('./views/pages/canteen/addCanteen/Index'))
+const EditCanteen = React.lazy(() => import('./views/pages/canteen/editCanteen/Index'))
+
 const cookies = new Cookies()
 let routes = []
 if (cookies.get('auth_token')) {
@@ -91,8 +95,6 @@ if (cookies.get('auth_token')) {
     { path: '/orders', name: 'Orders', element: Order },
     { path: '/orders/add', name: 'Add Order', element: AddOrder },
     { path: '/orders/edit/:id', name: 'Edit Order', element: EditOrder },
-    { path: '/detail-item', name: 'Detail Item', element: DetailItem },
-    // { path: '/canteen', name: 'Canteen', element: Canteen },
 
     // End Pages
     { path: '/dashboard', name: 'Dashboard', element: Dashboard },
