@@ -41,11 +41,11 @@ const EditItem = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
-        const inputName = document.getElementById('name')
+        const inputName = document.getElementById('nameItem')
         inputName.value = ''
         setName('')
 
-        const inputPrice = document.getElementById('price')
+        const inputPrice = document.getElementById('priceItem')
         inputPrice.value = ''
         setPrice('')
 
@@ -71,16 +71,17 @@ const EditItem = () => {
       .get(`${process.env.REACT_APP_API_URL}/api/v1/item/${params.id}`, {
         headers: {
           'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
         console.log(res.data.data)
-        setName(res.data.data.name)
-        setPrice(res.data.data.price)
-        setImage(res.data.data.img_url)
+        setName(res.data.data[0].name)
+        setPrice(res.data.data[0].price)
+        setImage(res.data.data[0].img_url)
       })
       .catch((err) => {
-        console.log(err?.response?.data?.message)
+        console.log(err.response)
       })
   }
 

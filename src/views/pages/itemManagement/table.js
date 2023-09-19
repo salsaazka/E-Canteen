@@ -46,6 +46,7 @@ const ItemsTable = () => {
       .delete(`${process.env.REACT_APP_API_URL}/api/v1/item/${id}`, {
         headers: {
           'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
