@@ -2,8 +2,10 @@ import React from 'react'
 
 import { CCard, CCardBody, CCol, CProgress, CRow } from '@coreui/react'
 import { CChartBar } from '@coreui/react-chartjs'
+import LoginMiddleware from 'src/components/LoginMiddleware'
 
 const Dashboard = () => {
+  LoginMiddleware()
   const progressExample = [
     { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
     { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
