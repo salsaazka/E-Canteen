@@ -33,19 +33,19 @@ const EditItem = () => {
         },
       )
       .then((res) => {
-        console.log(res?.data?.message)
-        toast.success(res?.data?.message, {
+        console.log(res.data.message)
+        toast.success(res.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
         })
-        const inputName = document.getElementById('name')
+        const inputName = document.getElementById('nameItem')
         inputName.value = ''
         setName('')
 
-        const inputPrice = document.getElementById('price')
+        const inputPrice = document.getElementById('priceItem')
         inputPrice.value = ''
         setPrice('')
 
@@ -55,8 +55,8 @@ const EditItem = () => {
         navigate('/items')
       })
       .catch((err) => {
-        console.log(err?.response?.data?.message)
-        toast.error(err?.response?.data?.message, {
+        console.log(err.response.data.message)
+        toast.error(err.response.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -71,6 +71,7 @@ const EditItem = () => {
       .get(`${process.env.REACT_APP_API_URL}/api/v1/item/${params.id}`, {
         headers: {
           'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
@@ -80,7 +81,7 @@ const EditItem = () => {
         setImage(res.data.data.img_url)
       })
       .catch((err) => {
-        console.log(err?.response?.data?.message)
+        console.log(err.response)
       })
   }
 

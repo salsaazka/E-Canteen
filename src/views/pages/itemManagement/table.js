@@ -33,7 +33,7 @@ const ItemsTable = () => {
     getItem()
   }, [])
   const data = item.map((item, index) => ({
-    id: item.id,
+    id: item._id,
     number: index + 1,
     canteen: item.canteen_id,
     name: item.name,
@@ -46,6 +46,7 @@ const ItemsTable = () => {
       .delete(`${process.env.REACT_APP_API_URL}/api/v1/item/${id}`, {
         headers: {
           'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
@@ -130,7 +131,7 @@ const ItemsTable = () => {
 
   return (
     <div>
-      <table {...getTableProps()} className="w-100 bg-light">
+      <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
         <thead className="text-left">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
