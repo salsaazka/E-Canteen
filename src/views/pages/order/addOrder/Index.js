@@ -18,7 +18,7 @@ const AddOrder = () => {
     e.preventDefault()
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/api/v1/order/order`,
+        `${process.env.REACT_APP_API_URL}/api/v1/order`,
         {
           user_id: user,
           canteen_id: canteen,
