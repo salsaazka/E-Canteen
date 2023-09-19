@@ -5,55 +5,63 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
+// import Cookies from 'universal-cookie'
 
-const ItemsTable = () => {
+const CanteenTable = () => {
+  // const cookies = new Cookies()
+
+  const [canteen, setCanteen] = useState([])
+  const navigate = useNavigate()
   const cookies = new Cookies()
 
-  const [item, setItem] = useState([])
-  const navigate = useNavigate()
-
-  const getItem = () => {
+  const getCanteen = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/item`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/canteen`, {
         headers: {
           'Content-Type': 'application/json',
           'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
-        console.log(res?.data?.data)
-        setItem(res?.data?.data)
+        console.log(res.data.data)
+        setCanteen(res.data.data)
       })
       .catch((err) => {
-        console.log(err?.response?.data?.message)
+        console.log(err.response.data.message)
       })
   }
 
   useEffect(() => {
-    getItem()
+    getCanteen()
   }, [])
-  const data = item.map((item, index) => ({
+
+  const data = canteen.map((item, index) => ({
     id: item._id,
     number: index + 1,
-    canteen: item.canteen_id,
     name: item.name,
-    price: item.price,
-    image: item.img_url,
   }))
 
   const handleDelete = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/v1/item/${id}`, {
+      .delete(`${process.env.REACT_APP_API_URL}/api/v1/canteen/${id}`, {
         headers: {
           'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
         },
       })
       .then((res) => {
-        console.log(res?.data?.data)
-        getItem()
+        console.log(res.data.data)
+        toast.success(res.data.message, {
+          position: 'bottom-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
+        getCanteen()
       })
       .catch((err) => {
-        console.log(err?.response?.data?.message)
+        console.log(err.response.data.message)
       })
   }
 
@@ -68,18 +76,6 @@ const ItemsTable = () => {
         accessor: 'name',
       },
       {
-        Header: 'Canteen',
-        accessor: 'canteen',
-      },
-      {
-        Header: 'Price',
-        accessor: 'price',
-      },
-      {
-        Header: 'Image',
-        accessor: 'image',
-      },
-      {
         Header: 'Action',
         accessor: 'action',
         Cell: (props) => {
@@ -87,7 +83,7 @@ const ItemsTable = () => {
             <div className="d-flex justify-content-center align-items-center">
               <button
                 className="btn btn-primary me-2"
-                onClick={() => navigate('/items/edit/' + props.row.original.id)}
+                onClick={() => navigate('/canteen/edit/' + props.row.original.id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +126,7 @@ const ItemsTable = () => {
 
   return (
     <div>
-      <table {...getTableProps()} className="w-100 bg-light">
+      <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
         <thead className="text-left">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
@@ -146,7 +142,11 @@ const ItemsTable = () => {
           {rows.map((row) => {
             prepareRow(row)
             return (
-              <tr key={row.id} {...row.getRowProps()}>
+              <tr
+                key={row.id}
+                {...row.getRowProps()}
+                style={{ backgroundColor: '#fff', borderBottom: '1px solid #D9D9D9' }}
+              >
                 {row.cells.map((cell) => {
                   return (
                     <td key={cell.column.id} {...cell.getCellProps()} className="border-none p-3">
@@ -164,4 +164,4 @@ const ItemsTable = () => {
   )
 }
 
-export default React.memo(ItemsTable)
+export default React.memo(CanteenTable)
