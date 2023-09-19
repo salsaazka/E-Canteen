@@ -114,37 +114,39 @@ const DetailItem = () => {
   })
 
   return (
-    <div>
-      <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
-        <thead className="text-left">
-          {headerGroups.map((headerGroup) => (
-            <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th key={column.id} {...column.getHeaderProps()} className="border-bottom p-3">
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row)
-            return (
-              <tr key={row.id} {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td key={cell.column.id} {...cell.getCellProps()} className="border-none p-3">
-                      {cell.render('Cell')}
-                    </td>
-                  )
-                })}
+    <div className="card">
+      <div className="card-body">
+        <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
+          <thead className="text-left">
+            {headerGroups.map((headerGroup) => (
+              <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th key={column.id} {...column.getHeaderProps()} className="border-bottom p-3">
+                    {column.render('Header')}
+                  </th>
+                ))}
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
-      <ToastContainer />
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row)
+              return (
+                <tr key={row.id} {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td key={cell.column.id} {...cell.getCellProps()} className="border-none p-3">
+                        {cell.render('Cell')}
+                      </td>
+                    )
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+        <ToastContainer />
+      </div>
     </div>
   )
 }
