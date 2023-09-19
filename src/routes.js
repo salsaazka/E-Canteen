@@ -73,6 +73,7 @@ const EditOrder = React.lazy(() => import('./views/pages/order/editOrder/Index')
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // Pages
+
   { path: '/user-management', name: 'User Management', element: UserManagement },
   { path: '/items', name: 'Items', element: Items },
   { path: '/items/add', name: 'Add Item', element: AddItem },

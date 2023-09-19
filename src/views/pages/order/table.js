@@ -10,9 +10,6 @@ import Cookies from 'universal-cookie'
 const OrderTable = () => {
   const cookies = new Cookies()
   const navigate = useNavigate()
-  const handleNavigate = () => {
-    navigate('/order-item/add')
-  }
 
   const [order, setOrder] = useState([])
   const getOrder = () => {
@@ -24,6 +21,7 @@ const OrderTable = () => {
         },
       })
       .then((res) => {
+        // console.log(cookies.get('auth_token'))
         console.log(res.data.data)
         setOrder(res.data.data)
       })
