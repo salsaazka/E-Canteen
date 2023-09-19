@@ -1,28 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
-const AddOrder = () => {
+const EditOrder = () => {
   const cookies = new Cookies()
   const navigate = useNavigate()
+  const params = useParams()
 
-  const [user, setUser] = useState('')
   const [canteen, setCanteen] = useState('')
-  const [totalPrice, setTotal] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/api/v1/order`,
+      .put(
+        `${process.env.REACT_APP_API_URL}/api/v1/canteen/${params.id}`,
         {
-          user_id: user,
-          canteen_id: canteen,
-          total_price: totalPrice,
+          name: canteen,
         },
         {
           headers: {
@@ -40,18 +37,10 @@ const AddOrder = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
-        const inputUser = document.getElementById('user')
-        inputUser.value = ''
-        setUser('')
-
-        const inputCanteem = document.getElementById('canteen')
-        inputCanteem.value = ''
+        navigate('/canteen')
+        const inputCanteen = document.getElementById('canteen')
+        inputCanteen.value = ''
         setCanteen('')
-
-        const inputTotal = document.getElementById('totalPrice')
-        inputTotal.value = ''
-        setTotal('')
-        navigate('/orders')
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -64,36 +53,41 @@ const AddOrder = () => {
         })
       })
   }
+
+  const getCanteen = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/canteen/${params.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        setCanteen(res.data.data.name)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+  }
+
+  useEffect(() => {
+    getCanteen()
+  }, [])
+
   return (
     <>
       <div className="card">
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>User ID</Form.Label>
-              <Form.Control
-                id="user"
-                type="text"
-                placeholder="Insert Your User ID"
-                onChange={(e) => setUser(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Canteen ID</Form.Label>
+              <Form.Label>Canteen Name</Form.Label>
               <Form.Control
                 id="canteen"
                 type="text"
-                placeholder="Insert Your Canteen ID"
+                defaultValue={canteen}
+                placeholder="Insert Name"
                 onChange={(e) => setCanteen(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Total Price</Form.Label>
-              <Form.Control
-                id="totalPrice"
-                type="number"
-                placeholder="Insert Your Total Price"
-                onChange={(e) => setTotal(e.target.value)}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -106,5 +100,4 @@ const AddOrder = () => {
     </>
   )
 }
-
-export default AddOrder
+export default EditOrder

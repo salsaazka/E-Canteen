@@ -60,7 +60,6 @@ const EditItem = React.lazy(() => import('./views/pages/itemManagement/editItem/
 
 const CardsManagement = React.lazy(() => import('./views/pages/cardManagement/Index'))
 const AddCard = React.lazy(() => import('./views/pages/cardManagement/addCard/Index'))
-// const EditCard = React.lazy(() => import('./views/pages/cardManagement/editCard/Index'))
 
 const Device = React.lazy(() => import('./views/pages/device/Index'))
 const AddDevice = React.lazy(() => import('./views/pages/device/addDevice/Index'))
@@ -69,6 +68,11 @@ const EditDevice = React.lazy(() => import('./views/pages/device/editDevice/Inde
 const Order = React.lazy(() => import('./views/pages/order/Index'))
 const AddOrder = React.lazy(() => import('./views/pages/order/addOrder/Index'))
 const EditOrder = React.lazy(() => import('./views/pages/order/editOrder/Index'))
+const DetailItem = React.lazy(() => import('./views/pages/order/detailItem/Index'))
+
+const Canteen = React.lazy(() => import('./views/pages/canteen/Index'))
+const AddCanteen = React.lazy(() => import('./views/pages/canteen/addCanteen/Index'))
+const EditCanteen = React.lazy(() => import('./views/pages/canteen/editCanteen/Index'))
 
 const cookies = new Cookies()
 let routes = []
@@ -83,13 +87,16 @@ if (cookies.get('auth_token')) {
     { path: '/items/edit/:id', name: 'Edit Item', element: EditItem },
     { path: '/cards', name: 'Cards', element: CardsManagement },
     { path: '/cards/add/:id', name: 'Add Card', element: AddCard },
-    // { path: '/cards/edit/:id', name: 'Edit Card', element: EditCard },
     { path: '/devices', name: 'Devices', element: Device },
     { path: '/devices/add', name: 'Add Device', element: AddDevice },
     { path: '/devices/edit/:id', name: 'Edit Device', element: EditDevice },
     { path: '/orders', name: 'Orders', element: Order },
     { path: '/orders/add', name: 'Add Order', element: AddOrder },
     { path: '/orders/edit/:id', name: 'Edit Order', element: EditOrder },
+    { path: '/detail-item', name: 'Detail Item', element: DetailItem },
+    { path: '/canteen', name: 'Canteen', element: Canteen },
+    { path: '/canteen/add', name: 'Add Canteen', element: AddCanteen },
+    { path: '/canteen/edit/:id', name: 'Edit Canteen', element: EditCanteen },
 
     // End Pages
     { path: '/dashboard', name: 'Dashboard', element: Dashboard },
