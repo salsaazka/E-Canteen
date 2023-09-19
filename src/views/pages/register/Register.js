@@ -19,6 +19,9 @@ import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const navigate = useNavigate()
+  const handleNavigate = () => {
+    navigate('/login')
+  }
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -123,7 +126,7 @@ const Register = () => {
                       />
                     </CInputGroup> */}
                     <div className="d-grid">
-                      <CButton color="success" type="submit">
+                      <CButton color="success" type="submit" onClick={handleNavigate}>
                         Create Account
                       </CButton>
                     </div>
