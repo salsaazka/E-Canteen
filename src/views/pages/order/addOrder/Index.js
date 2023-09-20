@@ -13,7 +13,7 @@ const AddOrder = () => {
 
   const [user, setUser] = useState('')
   const [canteen, setCanteen] = useState('')
-  const [name, setNameCanteen] = useState('')
+  const [listcanteen, setListCanteen] = useState([])
   const [totalPrice, setTotal] = useState('')
 
   const handleSubmit = (e) => {
@@ -98,8 +98,7 @@ const AddOrder = () => {
       })
       .then((res) => {
         console.log(res.data.data)
-        setCanteen(res.data.data._id)
-        setNameCanteen(res.data.data.name)
+        setListCanteen(res.data.data)
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -108,6 +107,7 @@ const AddOrder = () => {
   useEffect(() => {
     getCanteen()
   }, [])
+
   return (
     <>
       <div className="card">
@@ -134,7 +134,11 @@ const AddOrder = () => {
                 onChange={(e) => setCanteen(e.target.value)}
               >
                 <option>Open this select menu</option>
-                <option>{name}</option>
+                {listcanteen.map((item, index) => (
+                  <option key={index} value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
