@@ -35,7 +35,7 @@ const ItemsTable = () => {
   const data = item.map((item, index) => ({
     id: item._id,
     number: index + 1,
-    canteen: item.canteen_id,
+    canteen: item.canteen.name,
     name: item.name,
     price: item.price,
     image: item.img_url,
