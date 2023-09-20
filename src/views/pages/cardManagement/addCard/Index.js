@@ -14,6 +14,7 @@ const AddCard = () => {
 
   const [card, setCard] = useState('')
   const [user, setUser] = useState('')
+  const [name, setName] = useState('')
 
   const handleSubmit = (e) => {
     // console.log(params.id)
@@ -23,7 +24,7 @@ const AddCard = () => {
         `${process.env.REACT_APP_API_URL}/api/v1/card`,
         {
           card_id: card,
-          user_id: params.id,
+          user_id: user,
         },
         {
           headers: {
@@ -70,7 +71,8 @@ const AddCard = () => {
       })
       .then((res) => {
         console.log(res.data.data)
-        setUser(res.data.data.user_id)
+        setUser(res.data.data._id)
+        setName(res.data.data.name)
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -86,8 +88,9 @@ const AddCard = () => {
         <div className="card-body">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Card</Form.Label>
+              <Form.Label>Card ID</Form.Label>
               <Form.Control
+                disabled
                 id="card"
                 type="text"
                 placeholder="Insert Your Cards"
@@ -97,12 +100,23 @@ const AddCard = () => {
             <Form.Group className="mb-3">
               <Form.Label>User ID</Form.Label>
               <Form.Control
-                readOnly
+                disabled
                 id="user"
                 type="text"
                 placeholder="User ID"
-                value={params.id}
+                value={user}
                 onChange={(e) => setUser(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                disabled
+                id="name"
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
