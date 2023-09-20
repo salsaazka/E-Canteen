@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
 const AddOrder = () => {
   const cookies = new Cookies()
   const navigate = useNavigate()
+  const params = useParams()
 
   const [user, setUser] = useState('')
   const [canteen, setCanteen] = useState('')
+  const [name, setNameCanteen] = useState('')
   const [totalPrice, setTotal] = useState('')
 
   const handleSubmit = (e) => {
@@ -64,6 +66,48 @@ const AddOrder = () => {
         })
       })
   }
+
+  // Get User ID
+  // const getUsers = () => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/api/v1/user/${params.id}`, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data.data)
+  //       setUser(res.data.data._id)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response.data.message)
+  //     })
+  // }
+  // useEffect(() => {
+  //   getUsers()
+  // }, [])
+
+  // Get Canteen ID
+  const getCanteen = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/canteen`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        setCanteen(res.data.data._id)
+        setNameCanteen(res.data.data.name)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+  useEffect(() => {
+    getCanteen()
+  }, [])
   return (
     <>
       <div className="card">
@@ -75,17 +119,23 @@ const AddOrder = () => {
                 id="user"
                 type="text"
                 placeholder="Insert Your User ID"
+                value={user}
                 onChange={(e) => setUser(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Canteen ID</Form.Label>
-              <Form.Control
+              <Form.Select
+                aria-label="Default select example"
                 id="canteen"
                 type="text"
                 placeholder="Insert Your Canteen ID"
+                value={canteen}
                 onChange={(e) => setCanteen(e.target.value)}
-              />
+              >
+                <option>Open this select menu</option>
+                <option>{name}</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Total Price</Form.Label>
