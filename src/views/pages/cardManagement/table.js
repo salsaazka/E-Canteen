@@ -4,13 +4,21 @@ import { useTable } from 'react-table'
 import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-// import Cookies from 'universal-cookie'
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+import DetailCard from './tableDetailCard'
+import Cookies from 'universal-cookie'
 
 const CardTable = () => {
   // const cookies = new Cookies()
 
   const [card, setCards] = useState([])
   const navigate = useNavigate()
+
+  const [show, setShow] = useState(false)
+
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
 
   const getCard = () => {
     axios
@@ -76,21 +84,24 @@ const CardTable = () => {
         Cell: (props) => {
           return (
             <div className="d-flex justify-content-center align-items-center">
-              <button
-                className="btn btn-primary me-2"
-                onClick={() => navigate('/cards/edit/' + props.row.original.card)}
+              <Button
+                variant="warning"
+                onClick={() => handleShow(props?.row?.original?.card)}
+                // onClick={() => navigate('/cards/detail' + props.row.original.card)}
+                className="me-2"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
-                  fill="currentColor"
-                  className="bi bi-info-square-fill"
+                  fill="#FFFFFF"
+                  className="bi bi-eye"
                   viewBox="0 0 16 16"
                 >
-                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                 </svg>
-              </button>
+              </Button>
               <button
                 className="btn btn-danger"
                 onClick={() => handleDelete(props?.row?.original?.id)}
@@ -121,6 +132,15 @@ const CardTable = () => {
 
   return (
     <div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Detail Card</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <DetailCard />
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
       <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
         <thead className="text-left">
           {headerGroups.map((headerGroup) => (
