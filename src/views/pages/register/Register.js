@@ -56,8 +56,8 @@ const Register = () => {
         const inputName = document.getElementById('name')
         inputName.value = ''
         setName('')
-        const inputUsername = document.getElementById('username')
-        inputUsername.value = ''
+        const inputEmail = document.getElementById('email')
+        inputEmail.value = ''
         setEmail('')
         const inputPass = document.getElementById('password')
         inputPass.value = ''
