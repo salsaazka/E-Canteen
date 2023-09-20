@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
@@ -11,8 +11,29 @@ const AddOrder = () => {
   const navigate = useNavigate()
 
   const [user, setUser] = useState('')
+  const [canteens, setCanteens] = useState([])
   const [canteen, setCanteen] = useState('')
   const [totalPrice, setTotal] = useState('')
+
+  const getCanteen = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/canteen`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
+        },
+      })
+      .then((res) => {
+        setCanteens(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+
+  useEffect(() => {
+    getCanteen()
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -40,6 +61,7 @@ const AddOrder = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
+        navigate('/orders')
         const inputUser = document.getElementById('user')
         inputUser.value = ''
         setUser('')
@@ -51,7 +73,6 @@ const AddOrder = () => {
         const inputTotal = document.getElementById('totalPrice')
         inputTotal.value = ''
         setTotal('')
-        navigate('/orders')
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -80,12 +101,22 @@ const AddOrder = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Canteen ID</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 id="canteen"
                 type="text"
                 placeholder="Insert Your Canteen ID"
                 onChange={(e) => setCanteen(e.target.value)}
-              />
+              /> */}
+              <Form.Select defaultValue="" onChange={(e) => setCanteen(e.target.value)}>
+                <option value="" disabled>
+                  Pilih Kantin
+                </option>
+                {canteens.map((kantin) => (
+                  <option value={kantin._id} key={kantin._id}>
+                    {kantin.name}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Total Price</Form.Label>

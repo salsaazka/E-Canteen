@@ -51,6 +51,13 @@ const ItemsTable = () => {
       })
       .then((res) => {
         console.log(res?.data?.data)
+        toast.success(res?.data?.message, {
+          position: 'bottom-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
         getItem()
       })
       .catch((err) => {

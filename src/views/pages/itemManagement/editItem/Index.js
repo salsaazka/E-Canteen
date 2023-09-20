@@ -11,9 +11,30 @@ const EditItem = () => {
   const navigate = useNavigate()
   const params = useParams()
 
+  const [canteens, setCanteens] = useState([])
+  const [canteen, setCanteen] = useState('')
   const [nameItem, setName] = useState('')
   const [priceItem, setPrice] = useState('')
   const [image, setImage] = useState('')
+  const getCanteen = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/canteen`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
+        },
+      })
+      .then((res) => {
+        setCanteens(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+
+  useEffect(() => {
+    getCanteen()
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -21,6 +42,7 @@ const EditItem = () => {
       .put(
         `${process.env.REACT_APP_API_URL}/api/v1/item/${params.id}`,
         {
+          canteen_id: canteen,
           name: nameItem,
           price: priceItem,
           img_url: image,
@@ -96,7 +118,17 @@ const EditItem = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicCanteen">
               <Form.Label>Name Canteen</Form.Label>
-              <Form.Control type="text" placeholder="Insert Your Canteen" />
+              {/* <Form.Control type="text" placeholder="Insert Your Canteen" /> */}
+              <Form.Select onChange={(e) => setCanteen(e.target.value)}>
+                <option value="" selected disabled>
+                  Pilih Kantin
+                </option>
+                {canteens.map((canteen) => (
+                  <option value={canteen._id} key={canteen._id}>
+                    {canteen.name}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicName">

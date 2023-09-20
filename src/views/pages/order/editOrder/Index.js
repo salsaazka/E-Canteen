@@ -12,8 +12,25 @@ const EditOrder = () => {
   const params = useParams()
 
   const [user, setUser] = useState('')
+  const [canteens, setCanteens] = useState([])
   const [canteen, setCanteen] = useState('')
   const [totalPrice, setTotal] = useState('')
+
+  const getCanteen = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/canteen`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': cookies.get('auth_token'),
+        },
+      })
+      .then((res) => {
+        setCanteens(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -41,21 +58,11 @@ const EditOrder = () => {
           closeOnClick: true,
           pauseOnHover: true,
         })
-        const inputUser = document.getElementById('user')
-        inputUser.value = ''
-        setUser('')
-
-        const inputCanteen = document.getElementById('canteen')
-        inputCanteen.value = ''
-        setCanteen('')
-
-        const inputTotal = document.getElementById('totalPrice')
-        inputTotal.value = ''
-        setTotal('')
         navigate('/orders')
       })
       .catch((err) => {
         console.log(err.response.data.message)
+        console.log(err.response.data)
         toast.error(err.response.data.message, {
           position: 'bottom-right',
           autoClose: 3000,
@@ -87,6 +94,7 @@ const EditOrder = () => {
 
   useEffect(() => {
     getOrder()
+    getCanteen()
   }, [])
 
   return (
@@ -107,14 +115,21 @@ const EditOrder = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Canteen ID</Form.Label>
-              <Form.Control
-                id="canteen"
-                type="text"
-                defaultValue={canteen}
-                placeholder="Insert Your Canteen ID"
-                onChange={(e) => setCanteen(e.target.value)}
+              <Form.Select
                 disabled
-              />
+                value={canteen === '' ? '' : canteen}
+                defaultValue=""
+                onChange={(e) => setCanteen(e.target.value)}
+              >
+                <option value="" disabled>
+                  Pilih Kantin
+                </option>
+                {canteens.map((kantin) => (
+                  <option value={kantin._id} key={kantin._id}>
+                    {kantin.name}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Total Price</Form.Label>
