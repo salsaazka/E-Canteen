@@ -99,6 +99,7 @@ const EditItem = () => {
       .then((res) => {
         console.log(res.data.data)
         setName(res.data.data.name)
+        setCanteen(res.data.data.canteen._id)
         setPrice(res.data.data.price)
         setImage(res.data.data.img_url)
       })
@@ -119,7 +120,11 @@ const EditItem = () => {
             <Form.Group className="mb-3" controlId="formBasicCanteen">
               <Form.Label>Name Canteen</Form.Label>
               {/* <Form.Control type="text" placeholder="Insert Your Canteen" /> */}
-              <Form.Select onChange={(e) => setCanteen(e.target.value)}>
+              <Form.Select
+                value={canteen === '' ? '' : canteen}
+                defaultValue=""
+                onChange={(e) => setCanteen(e.target.value)}
+              >
                 <option value="" selected disabled>
                   Pilih Kantin
                 </option>

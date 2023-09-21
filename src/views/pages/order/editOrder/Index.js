@@ -118,7 +118,6 @@ const EditOrder = () => {
               <Form.Select
                 disabled
                 value={canteen === '' ? '' : canteen}
-                defaultValue=""
                 onChange={(e) => setCanteen(e.target.value)}
               >
                 <option value="" disabled>
