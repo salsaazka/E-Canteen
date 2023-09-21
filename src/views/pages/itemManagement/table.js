@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
+import ConvertToRP from 'src/components/ConvertToRP'
 
 const ItemsTable = () => {
   const cookies = new Cookies()
@@ -37,7 +38,7 @@ const ItemsTable = () => {
     number: index + 1,
     canteen: item.canteen.name,
     name: item.name,
-    price: item.price,
+    price: ConvertToRP(item.price),
     image: item.img_url,
   }))
 

@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import DetailItem from './tableItem'
+import ConvertToRP from 'src/components/ConvertToRP'
 
 const OrderTable = () => {
   const [show, setShow] = useState(false)
@@ -46,7 +47,7 @@ const OrderTable = () => {
     number: index + 1,
     user: item.user_id,
     canteen: item.canteen_id,
-    total: item.total_price,
+    total: ConvertToRP(item.total_price),
   }))
 
   const handleDelete = (id) => {
@@ -136,7 +137,7 @@ const OrderTable = () => {
                   </svg>
                 </button>
                 {/* <button className="btn btn-warning me-2" onClick={() => navigate('/detail-item')}>
-                  
+
                 </button> */}
                 <Button variant="warning" onClick={handleShow}>
                   <svg
