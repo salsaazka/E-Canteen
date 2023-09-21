@@ -15,6 +15,7 @@ import {
   cilStar,
   cilLibrary,
   cilUserPlus,
+  cilWallet,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -28,6 +29,12 @@ const _nav = [
       color: 'info',
       text: 'NEW',
     },
+  },
+  {
+    component: CNavItem,
+    name: 'Top Up',
+    to: '/',
+    icon: <CIcon icon={cilWallet} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,

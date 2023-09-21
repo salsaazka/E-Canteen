@@ -124,7 +124,7 @@ const UserManagementTable = () => {
   return (
     <div>
       <table {...getTableProps()} className="w-100 bg-light rounded">
-        <thead className="text-left">
+        <thead className="text-center">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -135,7 +135,7 @@ const UserManagementTable = () => {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody {...getTableBodyProps()} className="text-center">
           {rows.map((row) => {
             prepareRow(row)
             return (

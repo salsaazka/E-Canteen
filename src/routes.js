@@ -60,7 +60,7 @@ const EditItem = React.lazy(() => import('./views/pages/itemManagement/editItem/
 
 const CardsManagement = React.lazy(() => import('./views/pages/cardManagement/Index'))
 const AddCard = React.lazy(() => import('./views/pages/cardManagement/addCard/Index'))
-const DetailCard = React.lazy(() => import('./views/pages/cardManagement/table'))
+const DetailCard = React.lazy(() => import('./views/pages/cardManagement/detailCard/index'))
 
 const Device = React.lazy(() => import('./views/pages/device/Index'))
 const AddDevice = React.lazy(() => import('./views/pages/device/addDevice/Index'))
