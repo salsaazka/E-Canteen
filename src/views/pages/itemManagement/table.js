@@ -154,7 +154,11 @@ const ItemsTable = () => {
           {rows.map((row) => {
             prepareRow(row)
             return (
-              <tr key={row.id} {...row.getRowProps()}>
+              <tr
+                key={row.id}
+                {...row.getRowProps()}
+                style={{ backgroundColor: '#fff', borderBottom: '1px solid #D9D9D9' }}
+              >
                 {row.cells.map((cell) => {
                   return (
                     <td key={cell.column.id} {...cell.getCellProps()} className="border-none p-3">
