@@ -80,7 +80,7 @@ const CanteenTable = () => {
         accessor: 'action',
         Cell: (props) => {
           return (
-            <div className="d-flex">
+            <div className="d-flex justify-content-center align-items-center">
               <button
                 className="btn btn-primary me-2"
                 onClick={() => navigate('/canteen/edit/' + props.row.original.id)}
@@ -127,7 +127,7 @@ const CanteenTable = () => {
   return (
     <div>
       <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
-        <thead className="text-left">
+        <thead className="text-center">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -138,7 +138,7 @@ const CanteenTable = () => {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody {...getTableBodyProps()} className="text-center">
           {rows.map((row) => {
             prepareRow(row)
             return (

@@ -17,7 +17,7 @@ const CardTable = () => {
 
   const [show, setShow] = useState(false)
 
-  const handleShow = () => setShow(true)
+  const handleShow = (params) => setShow(true)
   const handleClose = () => setShow(false)
 
   const getCard = () => {
@@ -86,8 +86,8 @@ const CardTable = () => {
             <div className="d-flex justify-content-center align-items-center">
               <Button
                 variant="warning"
-                onClick={() => handleShow(props?.row?.original?.card)}
-                // onClick={() => navigate('/cards/detail' + props.row.original.card)}
+                // onClick={() => handleShow(props?.row?.original?.card)}
+                onClick={() => navigate('/cards/detail/' + props.row.original.card)}
                 className="me-2"
               >
                 <svg
@@ -132,7 +132,7 @@ const CardTable = () => {
 
   return (
     <div>
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Detail Card</Modal.Title>
         </Modal.Header>
@@ -140,9 +140,9 @@ const CardTable = () => {
           <DetailCard />
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
-      </Modal>
+      </Modal> */}
       <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
-        <thead className="text-left">
+        <thead className="text-center">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -153,7 +153,7 @@ const CardTable = () => {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody {...getTableBodyProps()} className="text-center">
           {rows.map((row) => {
             prepareRow(row)
             return (

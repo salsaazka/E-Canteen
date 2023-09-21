@@ -115,8 +115,8 @@ const DeviceTable = () => {
 
   return (
     <div>
-      <table {...getTableProps()} className="w-100 bg-  rounded mt-3">
-        <thead className="text-left">
+      <table {...getTableProps()} className="w-100 bg-light rounded mt-3">
+        <thead className="text-center">
           {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -127,7 +127,7 @@ const DeviceTable = () => {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody {...getTableBodyProps()} className="text-center">
           {rows.map((row) => {
             prepareRow(row)
             return (
