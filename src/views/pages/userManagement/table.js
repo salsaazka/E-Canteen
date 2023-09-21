@@ -23,8 +23,8 @@ const UserManagementTable = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.data)
-        setUsers(res.data.data)
+        console.log(res?.data?.data)
+        setUsers(res?.data?.data)
       })
       .catch((err) => {
         console.log(err.response.data.message)
