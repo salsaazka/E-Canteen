@@ -6,9 +6,11 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 import ConvertToRP from 'src/components/ConvertToRP'
+import stringSimilarity from 'string-similarity-js'
 
-const ItemsTable = () => {
+const ItemsTable = (props) => {
   const cookies = new Cookies()
+  const similarityThreshold = 0.2
 
   const [item, setItem] = useState([])
   const navigate = useNavigate()
@@ -33,14 +35,26 @@ const ItemsTable = () => {
   useEffect(() => {
     getItem()
   }, [])
-  const data = item.map((item, index) => ({
-    id: item._id,
-    number: index + 1,
-    canteen: item.canteen.name,
-    name: item.name,
-    price: ConvertToRP(item.price),
-    image: item.img_url,
-  }))
+  const data = item
+    .filter((data) => {
+      if (props.filter === '') {
+        return data
+      } else if (props.filter.length === 1) {
+        return data.name.charAt(0).toLowerCase() === props.filter.toLowerCase()
+      } else {
+        const similarity = stringSimilarity(data.name, props.filter.toLowerCase())
+        console.log(similarity)
+        return similarity >= similarityThreshold
+      }
+    })
+    .map((item, index) => ({
+      id: item._id,
+      number: index + 1,
+      canteen: item.canteen.name,
+      name: item.name,
+      price: ConvertToRP(item.price),
+      image: item.img_url,
+    }))
 
   const handleDelete = (id) => {
     axios
