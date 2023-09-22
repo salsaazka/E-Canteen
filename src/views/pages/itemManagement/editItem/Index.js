@@ -122,10 +122,9 @@ const EditItem = () => {
               {/* <Form.Control type="text" placeholder="Insert Your Canteen" /> */}
               <Form.Select
                 value={canteen === '' ? '' : canteen}
-                defaultValue=""
                 onChange={(e) => setCanteen(e.target.value)}
               >
-                <option value="" selected disabled>
+                <option value="" disabled>
                   Pilih Kantin
                 </option>
                 {canteens.map((canteen) => (

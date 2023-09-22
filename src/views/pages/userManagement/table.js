@@ -52,6 +52,13 @@ const UserManagementTable = () => {
       .then((res) => {
         console.log(res.data.data)
         getUsers()
+        toast.success(res.data.message, {
+          position: 'bottom-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
       })
       .catch((err) => {
         console.log(err.response.data.message)
