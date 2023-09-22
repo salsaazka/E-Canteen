@@ -4,10 +4,10 @@ import { useTable } from 'react-table'
 import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-// import Cookies from 'universal-cookie'
+import stringSimilarity from 'string-similarity-js'
 
-const DeviceTable = () => {
-  // const cookies = new Cookies()
+const DeviceTable = (props) => {
+  const similarityThreshold = 0.2
 
   const [device, setDevices] = useState([])
   const navigate = useNavigate()
@@ -32,11 +32,23 @@ const DeviceTable = () => {
     getDevices()
   }, [])
 
-  const data = device.map((item, index) => ({
-    id: item._id,
-    number: index + 1,
-    device: item.unique_device_id,
-  }))
+  const data = device
+    .filter((data) => {
+      if (props.filter === '') {
+        return data
+      } else if (props.filter.length === 1) {
+        return data.unique_device_id.charAt(0).toLowerCase() === props.filter.toLowerCase()
+      } else {
+        const similarity = stringSimilarity(data.unique_device_id, props.filter.toLowerCase())
+        console.log(similarity)
+        return similarity >= similarityThreshold
+      }
+    })
+    .map((item, index) => ({
+      id: item._id,
+      number: index + 1,
+      device: item.unique_device_id,
+    }))
 
   const handleDelete = (id) => {
     axios

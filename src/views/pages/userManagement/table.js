@@ -5,10 +5,11 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
+import stringSimilarity from 'string-similarity-js'
 
-const UserManagementTable = () => {
+const UserManagementTable = (props) => {
   const navigate = useNavigate()
-
+  const similarityThreshold = 0.2
   const handleNavigate = () => {
     navigate('/cards/add')
   }
@@ -34,13 +35,24 @@ const UserManagementTable = () => {
   useEffect(() => {
     getUsers()
   }, [])
-
-  const data = users.map((item, index) => ({
-    id: item._id,
-    number: index + 1,
-    name: item.name,
-    email: item.email,
-  }))
+  const data = users
+    .filter((data) => {
+      if (props.filter === '') {
+        return data
+      } else if (props.filter.length === 1) {
+        return data.name.charAt(0).toLowerCase() === props.filter.toLowerCase()
+      } else {
+        const similarity = stringSimilarity(data.name, props.filter.toLowerCase())
+        console.log(similarity)
+        return similarity >= similarityThreshold
+      }
+    })
+    .map((item, index) => ({
+      id: item._id,
+      number: index + 1,
+      name: item.name,
+      email: item.email,
+    }))
 
   const handleDelete = (id) => {
     axios

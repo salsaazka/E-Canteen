@@ -1,27 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import UserManagementTable from './table'
 
 const UserManagement = () => {
+  const [filter, setFilter] = useState('')
   return (
     <div className="card">
       <div className="card-body">
-        {/* <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+        <div className="d-flex justify-content-center">
+          <Form.Group className="w-100 mb-3" controlId="formBasicName">
+            <Form.Control
+              id="nameItem"
+              onChange={(e) => setFilter(e.target.value)}
+              type="text"
+              placeholder="Insert Your Name"
+            />
           </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form> */}
-        <UserManagementTable />
+        </div>
+        <UserManagementTable filter={filter} />
       </div>
     </div>
   )

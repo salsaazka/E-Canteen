@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ItemsTable from './table'
 import { useNavigate } from 'react-router-dom'
-
 const Items = () => {
   const navigate = useNavigate()
   const handleNavigate = () => {
@@ -16,7 +15,7 @@ const Items = () => {
     <div className="card">
       <div className="card-body">
         <div className="d-flex justify-content-between">
-          <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Group className="w-75" controlId="formBasicName">
             <Form.Control
               id="nameItem"
               onChange={(e) => setFilter(e.target.value)}
